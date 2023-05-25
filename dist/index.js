@@ -1,104 +1,15 @@
 function noop() {}
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (typeof call === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-var performance;
+let performance;
 
 if (wx.getPerformance) {
-  var _wx$getSystemInfoSync = wx.getSystemInfoSync(),
-      platform = _wx$getSystemInfoSync.platform;
-
-  var wxPerf = wx.getPerformance();
-  var initTime = wxPerf.now();
-  var clientPerfAdapter = Object.assign({}, wxPerf, {
-    now: function now() {
+  const {
+    platform
+  } = wx.getSystemInfoSync();
+  const wxPerf = wx.getPerformance();
+  const initTime = wxPerf.now();
+  const clientPerfAdapter = Object.assign({}, wxPerf, {
+    now: function () {
       return (wxPerf.now() - initTime) / 1000;
     }
   });
@@ -107,14 +18,14 @@ if (wx.getPerformance) {
 
 var performance$1 = performance;
 
-var _wx$getSystemInfoSync$1 = wx.getSystemInfoSync(),
-    screenWidth = _wx$getSystemInfoSync$1.screenWidth,
-    screenHeight = _wx$getSystemInfoSync$1.screenHeight,
-    devicePixelRatio = _wx$getSystemInfoSync$1.devicePixelRatio;
-
-var innerWidth = screenWidth;
-var innerHeight = screenHeight;
-var screen = {
+const {
+  screenWidth,
+  screenHeight,
+  devicePixelRatio
+} = wx.getSystemInfoSync();
+const innerWidth = screenWidth;
+const innerHeight = screenHeight;
+const screen = {
   width: screenWidth,
   height: screenHeight,
   availWidth: innerWidth,
@@ -122,27 +33,27 @@ var screen = {
   availLeft: 0,
   availTop: 0
 };
-var scrollX = 0;
-var scrollY = 0;
-var ontouchstart = null;
-var ontouchmove = null;
-var ontouchend = null;
+const scrollX = 0;
+const scrollY = 0;
+const ontouchstart = null;
+const ontouchmove = null;
+const ontouchend = null;
 
 function parentNode(obj, level) {
   if (!('parentNode' in obj)) {
-    var _parent;
+    let _parent;
 
     if (level === 0) {
-      _parent = function _parent() {
+      _parent = function () {
         // return document
         return null;
       };
     } else if (level === 1) {
-      _parent = function _parent() {
+      _parent = function () {
         return document.documentElement;
       };
     } else {
-      _parent = function _parent() {
+      _parent = function () {
         return document.body;
       };
     }
@@ -154,25 +65,25 @@ function parentNode(obj, level) {
   }
 
   if (!('parentElement' in obj)) {
-    var _parent2;
+    let _parent;
 
     if (level === 0) {
-      _parent2 = function _parent2() {
+      _parent = function () {
         return null;
       };
     } else if (level === 1) {
-      _parent2 = function _parent2() {
+      _parent = function () {
         return document.documentElement;
       };
     } else {
-      _parent2 = function _parent2() {
+      _parent = function () {
         return document.body;
       };
     }
 
     Object.defineProperty(obj, 'parentElement', {
       enumerable: true,
-      get: _parent2
+      get: _parent
     });
   }
 }
@@ -200,7 +111,7 @@ function clientRegion(obj) {
 
   if (!('getBoundingClientRect' in obj)) {
     obj.getBoundingClientRect = function () {
-      var ret = {
+      const ret = {
         x: 0,
         y: 0,
         top: 0,
@@ -237,7 +148,7 @@ function scrollRegion(obj) {
   }
 }
 function classList(obj) {
-  var noop = function noop() {};
+  const noop = function () {};
 
   obj.classList = [];
   obj.classList.add = noop;
@@ -246,254 +157,168 @@ function classList(obj) {
   obj.classList.toggle = noop;
 }
 function copyProperties(target, source) {
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = Object.getOwnPropertyNames(source)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var key = _step.value;
-
-      if (key !== 'constructor' && key !== 'prototype' && key !== 'name') {
-        var desc = Object.getOwnPropertyDescriptor(source, key);
-        Object.defineProperty(target, key, desc);
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
+  for (let key of Object.getOwnPropertyNames(source)) {
+    if (key !== 'constructor' && key !== 'prototype' && key !== 'name') {
+      let desc = Object.getOwnPropertyDescriptor(source, key);
+      Object.defineProperty(target, key, desc);
     }
   }
 }
 
-var _events = new WeakMap();
+const _events = new WeakMap();
 
-var EventTarget =
-/*#__PURE__*/
-function () {
-  function EventTarget() {
-    _classCallCheck(this, EventTarget);
-
+class EventTarget {
+  constructor() {
     _events.set(this, {});
   }
 
-  _createClass(EventTarget, [{
-    key: "addEventListener",
-    value: function addEventListener(type, listener) {
-      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  addEventListener(type, listener, options = {}) {
+    let events = _events.get(this);
 
-      var events = _events.get(this);
+    if (!events) {
+      events = {};
 
-      if (!events) {
-        events = {};
-
-        _events.set(this, events);
-      }
-
-      if (!events[type]) {
-        events[type] = [];
-      }
-
-      events[type].push(listener);
-
-      if (options.capture) {
-        console.warn('EventTarget.addEventListener: options.capture is not implemented.');
-      }
-
-      if (options.once) {
-        console.warn('EventTarget.addEventListener: options.once is not implemented.');
-      }
-
-      if (options.passive) {
-        console.warn('EventTarget.addEventListener: options.passive is not implemented.');
-      }
+      _events.set(this, events);
     }
-  }, {
-    key: "removeEventListener",
-    value: function removeEventListener(type, listener) {
 
-      var events = _events.get(this);
+    if (!events[type]) {
+      events[type] = [];
+    }
 
-      if (events) {
-        var listeners = events[type];
+    events[type].push(listener);
 
-        if (listeners && listeners.length > 0) {
-          for (var i = listeners.length; i--; i > 0) {
-            if (listeners[i] === listener) {
-              listeners.splice(i, 1);
-              break;
-            }
+    if (options.capture) {
+      console.warn('EventTarget.addEventListener: options.capture is not implemented.');
+    }
+
+    if (options.once) {
+      console.warn('EventTarget.addEventListener: options.once is not implemented.');
+    }
+
+    if (options.passive) {
+      console.warn('EventTarget.addEventListener: options.passive is not implemented.');
+    }
+  }
+
+  removeEventListener(type, listener, options = {}) {
+    const events = _events.get(this);
+
+    if (events) {
+      const listeners = events[type];
+
+      if (listeners && listeners.length > 0) {
+        for (let i = listeners.length; i--; i > 0) {
+          if (listeners[i] === listener) {
+            listeners.splice(i, 1);
+            break;
           }
         }
       }
     }
-  }, {
-    key: "dispatchEvent",
-    value: function dispatchEvent() {
-      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-      var listeners = _events.get(this)[event.type];
-
-      if (listeners) {
-        for (var i = 0; i < listeners.length; i++) {
-          listeners[i](event);
-        }
-      }
-    }
-  }]);
-
-  return EventTarget;
-}();
-
-var Node =
-/*#__PURE__*/
-function (_EventTarget) {
-  _inherits(Node, _EventTarget);
-
-  function Node() {
-    var _this;
-
-    _classCallCheck(this, Node);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Node).call(this));
-    _this.childNodes = [];
-    return _this;
   }
 
-  _createClass(Node, [{
-    key: "appendChild",
-    value: function appendChild(node) {
+  dispatchEvent(event = {}) {
+    const listeners = _events.get(this)[event.type];
+
+    if (listeners) {
+      for (let i = 0; i < listeners.length; i++) {
+        listeners[i](event);
+      }
+    }
+  }
+
+}
+
+class Node extends EventTarget {
+  constructor() {
+    super();
+    this.childNodes = [];
+  }
+
+  appendChild(node) {
+    this.childNodes.push(node);
+
+    if (node instanceof Node) {
       this.childNodes.push(node);
-
-      if (node instanceof Node) {
-        this.childNodes.push(node);
-      } else {
-        throw new TypeError('Failed to executed \'appendChild\' on \'Node\': parameter 1 is not of type \'Node\'.');
-      }
+    } else {
+      throw new TypeError('Failed to executed \'appendChild\' on \'Node\': parameter 1 is not of type \'Node\'.');
     }
-  }, {
-    key: "cloneNode",
-    value: function cloneNode() {
-      var copyNode = Object.create(this);
-      Object.assign(copyNode, this);
-      return copyNode;
-    }
-  }, {
-    key: "removeChild",
-    value: function removeChild(node) {
-      var index = this.childNodes.findIndex(function (child) {
-        return child === node;
-      });
-
-      if (index > -1) {
-        return this.childNodes.splice(index, 1);
-      }
-
-      return null;
-    }
-  }]);
-
-  return Node;
-}(EventTarget);
-
-var Element =
-/*#__PURE__*/
-function (_Node) {
-  _inherits(Element, _Node);
-
-  function Element() {
-    var _this;
-
-    _classCallCheck(this, Element);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Element).call(this));
-    _this.className = '';
-    _this.children = [];
-    return _this;
   }
 
-  _createClass(Element, [{
-    key: "setAttribute",
-    value: function setAttribute(name, value) {
-      this[name] = value;
-    }
-  }, {
-    key: "getAttribute",
-    value: function getAttribute(name) {
-      return this[name];
-    }
-  }, {
-    key: "setAttributeNS",
-    value: function setAttributeNS(name, value) {
-      this[name] = value;
-    }
-  }, {
-    key: "getAttributeNS",
-    value: function getAttributeNS(name) {
-      return this[name];
-    }
-  }]);
-
-  return Element;
-}(Node);
-
-var HTMLElement =
-/*#__PURE__*/
-function (_Element) {
-  _inherits(HTMLElement, _Element);
-
-  function HTMLElement() {
-    var _this;
-
-    var tagName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var level = arguments.length > 1 ? arguments[1] : undefined;
-
-    _classCallCheck(this, HTMLElement);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(HTMLElement).call(this));
-    _this.className = '';
-    _this.children = [];
-    _this.focus = noop;
-    _this.blur = noop;
-    _this.insertBefore = noop;
-    _this.appendChild = noop;
-    _this.removeChild = noop;
-    _this.remove = noop;
-    _this.innerHTML = '';
-    _this.tagName = tagName.toUpperCase();
-    parentNode(_assertThisInitialized(_this), level);
-    style(_assertThisInitialized(_this));
-    classList(_assertThisInitialized(_this));
-    clientRegion(_assertThisInitialized(_this));
-    offsetRegion(_assertThisInitialized(_this));
-    scrollRegion(_assertThisInitialized(_this));
-    return _this;
+  cloneNode() {
+    const copyNode = Object.create(this);
+    Object.assign(copyNode, this);
+    return copyNode;
   }
 
-  return HTMLElement;
-}(Element);
+  removeChild(node) {
+    const index = this.childNodes.findIndex(child => child === node);
+
+    if (index > -1) {
+      return this.childNodes.splice(index, 1);
+    }
+
+    return null;
+  }
+
+}
+
+class Element extends Node {
+  constructor() {
+    super();
+    this.className = '';
+    this.children = [];
+  }
+
+  setAttribute(name, value) {
+    this[name] = value;
+  }
+
+  getAttribute(name) {
+    return this[name];
+  }
+
+  setAttributeNS(name, value) {
+    this[name] = value;
+  }
+
+  getAttributeNS(name) {
+    return this[name];
+  }
+
+}
+
+class HTMLElement extends Element {
+  constructor(tagName = '', level) {
+    super();
+    this.className = '';
+    this.children = [];
+    this.focus = noop;
+    this.blur = noop;
+    this.insertBefore = noop;
+    this.appendChild = noop;
+    this.removeChild = noop;
+    this.remove = noop;
+    this.innerHTML = '';
+    this.tagName = tagName.toUpperCase();
+    parentNode(this, level);
+    style(this);
+    classList(this);
+    clientRegion(this);
+    offsetRegion(this);
+    scrollRegion(this);
+  }
+
+}
 
 // import { HTMLCanvasElement, CanvasRenderingContext2D, WebGLRenderingContext } from './constructor'
-var _canvas = null; //目前使用的canvas
+let _canvas = null; //目前使用的canvas
 
-var _canvasMap = new Map();
+let _canvasMap = new Map();
 
-function registerCanvas() {
-  var id = null;
-  var canvas = null;
-
-  for (var _len = arguments.length, argus = new Array(_len), _key = 0; _key < _len; _key++) {
-    argus[_key] = arguments[_key];
-  }
+function registerCanvas(...argus) {
+  let id = null;
+  let canvas = null;
 
   if (argus.length === 0) {
     throw new Error('need arguments');
@@ -512,17 +337,17 @@ function registerCanvas() {
   if (_canvasMap.size >= 5) {
     console.warn('canvas map size bigger 5 please remove unused canvas!');
 
-    var key = _canvasMap.keys().next().value;
+    let key = _canvasMap.keys().next().value;
 
     if (key) {
-      _canvasMap["delete"](key);
+      _canvasMap.delete(key);
     }
   }
 
   if (_canvasMap.has(id)) {
     _canvas = _canvasMap.get(id);
   } else {
-    var element = new HTMLElement('canvas');
+    let element = new HTMLElement('canvas');
 
     if (!canvas.tagName || canvas.tagName.toUpperCase() != 'CANVAS') {
       canvas.type = 'canvas';
@@ -547,9 +372,9 @@ function unregisterCanvas(argu) {
   }
 
   if (typeof argu === 'string') {
-    return _canvasMap["delete"](argu);
+    return _canvasMap.delete(argu);
   } else if (argu._canvasId) {
-    return _canvasMap["delete"](argu._canvasId);
+    return _canvasMap.delete(argu._canvasId);
   }
 
   _canvas = null;
@@ -562,7 +387,7 @@ function clearCanvas() {
   _canvas = null;
 }
 
-var style$1 = {
+const style$1 = {
   "0": "animation-delay",
   "1": "animation-direction",
   "2": "animation-duration",
@@ -1153,9 +978,9 @@ var style$1 = {
 };
 
 function getImageComputedStyle(image) {
-  var width = image.width;
-  var height = image.height;
-  var style = Object.assign(style$1, {
+  const width = image.width;
+  const height = image.height;
+  const style = Object.assign(style$1, {
     "display": "inline",
     "position": "static",
     "inlineSize": width + "px",
@@ -1170,8 +995,8 @@ function getImageComputedStyle(image) {
 }
 
 function getCanvasComputedStyle(canvas) {
-  var rect = canvas.getBoundingClientRect();
-  var style = Object.assign(style$1, {
+  const rect = canvas.getBoundingClientRect();
+  const style = Object.assign(style$1, {
     "display": "inline",
     "position": "static",
     "inlineSize": rect.width + "px",
@@ -1185,37 +1010,41 @@ function getCanvasComputedStyle(canvas) {
   return style;
 }
 
-var Event = function Event(type) {
-  _classCallCheck(this, Event);
+class Event {
+  constructor(type) {
+    this.cancelBubble = false;
+    this.cancelable = false;
+    this.target = null;
+    this.currentTarget = null;
+    this.preventDefault = noop;
+    this.stopPropagation = noop;
+    this.type = type;
+    this.timeStamp = Date.now();
+  }
 
-  this.cancelBubble = false;
-  this.cancelable = false;
-  this.target = null;
-  this.currentTarget = null;
-  this.preventDefault = noop;
-  this.stopPropagation = noop;
-  this.type = type;
-  this.timeStamp = Date.now();
-};
+}
 
-var location = {
+const location = {
   href: 'app.js',
-  reload: function reload() {},
-  replace: function replace(href) {
+
+  reload() {},
+
+  replace(href) {
     this.href = href;
   }
+
 };
 
-var imageConstructor = wx.createImage().constructor; // imageConstructor.__proto__.__proto__ = new HTMLElement();
+const imageConstructor = wx.createImage(); // imageConstructor.__proto__.__proto__ = new HTMLElement();
 
 function Image() {
-  var canvas = _canvas;
+  let canvas = _canvas;
 
   if (!canvas) {
     throw new Error('please register a canvas');
   }
 
-  var image = canvas.createImage(); // image.__proto__.__proto__.__proto__ = new HTMLImageElement();
+  const image = canvas.createImage(); // image.__proto__.__proto__.__proto__ = new HTMLImageElement();
 
   if (!('tagName' in image)) {
     image.tagName = 'IMG';
@@ -1226,77 +1055,54 @@ function Image() {
   return image;
 }
 
-var DocumentElement =
-/*#__PURE__*/
-function (_HTMLElement) {
-  _inherits(DocumentElement, _HTMLElement);
-
-  function DocumentElement() {
-    _classCallCheck(this, DocumentElement);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(DocumentElement).call(this, 'html', 0));
+class DocumentElement extends HTMLElement {
+  constructor() {
+    super('html', 0);
   }
 
-  return DocumentElement;
-}(HTMLElement);
+}
 
-var Body =
-/*#__PURE__*/
-function (_HTMLElement) {
-  _inherits(Body, _HTMLElement);
-
-  function Body() {
-    _classCallCheck(this, Body);
-
+class Body extends HTMLElement {
+  constructor() {
     // 为了性能, 此处不按照标准的DOM层级关系设计
     // 将 body 设置为 0级, parent元素为null
-    return _possibleConstructorReturn(this, _getPrototypeOf(Body).call(this, 'body', 0));
+    super('body', 0);
   }
 
-  return Body;
-}(HTMLElement);
+}
 
-var TouchEvent =
-/*#__PURE__*/
-function (_Event) {
-  _inherits(TouchEvent, _Event);
-
-  function TouchEvent(type) {
-    var _this;
-
-    _classCallCheck(this, TouchEvent);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(TouchEvent).call(this, type));
-    _this.touches = [];
-    _this.targetTouches = [];
-    _this.changedTouches = [];
-    _this.target = null;
-    _this.currentTarget = null;
-    return _this;
+class TouchEvent extends Event {
+  constructor(type) {
+    super(type);
+    this.touches = [];
+    this.targetTouches = [];
+    this.changedTouches = [];
+    this.target = null;
+    this.currentTarget = null;
   }
 
-  return TouchEvent;
-}(Event);
-var Touch = function Touch(touch) {
-  _classCallCheck(this, Touch);
+}
+class Touch {
+  constructor(touch) {
+    // CanvasTouch{identifier, x, y}
+    // Touch{identifier, pageX, pageY, clientX, clientY, force}
+    this.identifier = touch.identifier;
+    this.force = touch.force === undefined ? 1 : touch.force;
+    this.pageX = touch.pageX || touch.x;
+    this.pageY = touch.pageY || touch.y;
+    this.clientX = touch.clientX || touch.x;
+    this.clientY = touch.clientY || touch.y;
+    this.screenX = this.pageX;
+    this.screenY = this.pageY;
+  }
 
-  // CanvasTouch{identifier, x, y}
-  // Touch{identifier, pageX, pageY, clientX, clientY, force}
-  this.identifier = touch.identifier;
-  this.force = touch.force === undefined ? 1 : touch.force;
-  this.pageX = touch.pageX || touch.x;
-  this.pageY = touch.pageY || touch.y;
-  this.clientX = touch.clientX || touch.x;
-  this.clientY = touch.clientY || touch.y;
-  this.screenX = this.pageX;
-  this.screenY = this.pageY;
-}; // wx.onTouchStart(eventHandlerFactory('touchstart'))
+} // wx.onTouchStart(eventHandlerFactory('touchstart'))
 // wx.onTouchMove(eventHandlerFactory('touchmove'))
 // wx.onTouchEnd(eventHandlerFactory('touchend'))
 // wx.onTouchCancel(eventHandlerFactory('touchcancel'))
 
-var events = {};
-var document$1 = {
+const events = {};
+const document$1 = {
   readyState: 'complete',
   visibilityState: 'visible',
   // 'visible' , 'hidden'
@@ -1311,7 +1117,8 @@ var document$1 = {
   onvisibilitychange: null,
   parentNode: null,
   parentElement: null,
-  createElement: function createElement(tagName) {
+
+  createElement(tagName) {
     tagName = tagName.toLowerCase();
 
     if (tagName === 'canvas') {
@@ -1332,21 +1139,25 @@ var document$1 = {
 
     return new HTMLElement(tagName);
   },
-  createElementNS: function createElementNS(nameSpace, tagName) {
+
+  createElementNS(nameSpace, tagName) {
     return this.createElement(tagName);
   },
-  createTextNode: function createTextNode(text) {
+
+  createTextNode(text) {
     // TODO: Do we need the TextNode Class ???
     return text;
   },
-  getElementById: function getElementById(id) {
+
+  getElementById(id) {
     if (_canvasMap.has(id)) {
       return _canvasMap.get(id);
     }
 
     return null;
   },
-  getElementsByTagName: function getElementsByTagName(tagName) {
+
+  getElementsByTagName(tagName) {
     tagName = tagName.toLowerCase();
 
     if (tagName === 'head') {
@@ -1354,26 +1165,29 @@ var document$1 = {
     } else if (tagName === 'body') {
       return [document$1.body];
     } else if (tagName === 'canvas') {
-      return _toConsumableArray(_canvasMap);
+      return [..._canvasMap];
     }
 
     return [];
   },
-  getElementsByTagNameNS: function getElementsByTagNameNS(nameSpace, tagName) {
+
+  getElementsByTagNameNS(nameSpace, tagName) {
     return this.getElementsByTagName(tagName);
   },
-  getElementsByName: function getElementsByName(tagName) {
+
+  getElementsByName(tagName) {
     if (tagName === 'head') {
       return [document$1.head];
     } else if (tagName === 'body') {
       return [document$1.body];
     } else if (tagName === 'canvas') {
-      return _toConsumableArray(_canvasMap);
+      return [..._canvasMap];
     }
 
     return [];
   },
-  querySelector: function querySelector(query) {
+
+  querySelector(query) {
     if (query === 'head') {
       return document$1.head;
     } else if (query === 'body') {
@@ -1381,7 +1195,7 @@ var document$1 = {
     } else if (query === 'canvas') {
       return _canvas;
     } else {
-      var id = query.slice(1);
+      let id = query.slice(1);
 
       if (_canvasMap.has(id)) {
         return _canvasMap.get(id);
@@ -1390,29 +1204,32 @@ var document$1 = {
 
     return null;
   },
-  querySelectorAll: function querySelectorAll(query) {
+
+  querySelectorAll(query) {
     if (query === 'head') {
       return [document$1.head];
     } else if (query === 'body') {
       return [document$1.body];
     } else if (query === 'canvas') {
-      return _toConsumableArray(_canvasMap);
+      return [..._canvasMap];
     }
 
     return [];
   },
-  addEventListener: function addEventListener(type, listener) {
+
+  addEventListener(type, listener) {
     if (!events[type]) {
       events[type] = [];
     }
 
     events[type].push(listener);
   },
-  removeEventListener: function removeEventListener(type, listener) {
-    var listeners = events[type];
+
+  removeEventListener(type, listener) {
+    const listeners = events[type];
 
     if (listeners && listeners.length > 0) {
-      for (var i = listeners.length; i--; i > 0) {
+      for (let i = listeners.length; i--; i > 0) {
         if (listeners[i] === listener) {
           listeners.splice(i, 1);
           break;
@@ -1420,12 +1237,13 @@ var document$1 = {
       }
     }
   },
-  dispatchEvent: function dispatchEvent(event) {
-    var type = event.type;
-    var listeners = events[type];
+
+  dispatchEvent(event) {
+    const type = event.type;
+    const listeners = events[type];
 
     if (listeners) {
-      for (var i = 0; i < listeners.length; i++) {
+      for (let i = 0; i < listeners.length; i++) {
         listeners[i](event);
       }
     }
@@ -1434,6 +1252,7 @@ var document$1 = {
       event.target['on' + type](event);
     }
   }
+
 };
 document$1.documentElement = new DocumentElement();
 document$1.head = new HTMLElement('head');
@@ -1442,14 +1261,14 @@ document$1.body = new Body();
 function onVisibilityChange(visible) {
   return function () {
     document$1.visibilityState = visible ? 'visible' : 'hidden';
-    var hidden = !visible;
+    const hidden = !visible;
 
     if (document$1.hidden === hidden) {
       return;
     }
 
     document$1.hidden = hidden;
-    var event = new Event('visibilitychange');
+    const event = new Event('visibilitychange');
     event.target = document$1;
     event.timeStamp = Date.now();
     document$1.dispatchEvent(event);
@@ -1464,17 +1283,17 @@ if (wx.onShow) {
   wx.onShow(onVisibilityChange(true));
 }
 
-var systemInfo = wx.getSystemInfoSync();
-var system = systemInfo.system;
-var platform$1 = systemInfo.platform;
-var language = systemInfo.language;
-var android = system.toLowerCase().indexOf('android') !== -1;
-var uaDesc = android ? 'Android; CPU Android 6.0' : 'iPhone; CPU iPhone OS 10_3_1 like Mac OS X';
-var ua = "Mozilla/5.0 (".concat(uaDesc, ") AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E8301 MicroMessenger/6.6.0 MiniGame NetType/WIFI Language/").concat(language);
-var navigator = {
-  platform: platform$1,
+const systemInfo = wx.getSystemInfoSync();
+const system = systemInfo.system;
+const platform = systemInfo.platform;
+const language = systemInfo.language;
+const android = system.toLowerCase().indexOf('android') !== -1;
+const uaDesc = android ? 'Android; CPU Android 6.0' : 'iPhone; CPU iPhone OS 10_3_1 like Mac OS X';
+const ua = `Mozilla/5.0 (${uaDesc}) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E8301 MicroMessenger/6.6.0 MiniGame NetType/WIFI Language/${language}`;
+const navigator = {
+  platform,
   language: language,
-  appVersion: "5.0 (".concat(uaDesc, ") AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"),
+  appVersion: `5.0 (${uaDesc}) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1`,
   userAgent: ua,
   onLine: true,
   // TODO 用 wx.getNetworkStateChange 和 wx.onNetworkStateChange 来返回真实的状态
@@ -1492,23 +1311,21 @@ if (wx.onNetworkStatusChange) {
   });
 }
 
-var _requestHeader = new WeakMap();
+const _requestHeader = new WeakMap();
 
-var _responseHeader = new WeakMap();
+const _responseHeader = new WeakMap();
 
-var _requestTask = new WeakMap();
+const _requestTask = new WeakMap();
 
-function _triggerEvent(type) {
-  var event = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function _triggerEvent(type, event = {}) {
   event.target = event.target || this;
 
-  if (typeof this["on".concat(type)] === 'function') {
-    this["on".concat(type)].call(this, event);
+  if (typeof this[`on${type}`] === 'function') {
+    this[`on${type}`].call(this, event);
   }
 }
 
-function _changeReadyState(readyState) {
-  var event = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function _changeReadyState(readyState, event = {}) {
   this.readyState = readyState;
   event.readyState = readyState;
 
@@ -1519,251 +1336,225 @@ function _isRelativePath(url) {
   return !/^(http|https|ftp|wxfile):\/\/.*/i.test(url);
 }
 
-var XMLHttpRequest =
-/*#__PURE__*/
-function (_EventTarget) {
-  _inherits(XMLHttpRequest, _EventTarget);
-
-  function XMLHttpRequest() {
-    var _this;
-
-    _classCallCheck(this, XMLHttpRequest);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(XMLHttpRequest).call(this));
+class XMLHttpRequest extends EventTarget {
+  constructor() {
+    super();
     /*
      * TODO 这一批事件应该是在 XMLHttpRequestEventTarget.prototype 上面的
      */
 
-    _this.onabort = null;
-    _this.onerror = null;
-    _this.onload = null;
-    _this.onloadstart = null;
-    _this.onprogress = null;
-    _this.ontimeout = null;
-    _this.onloadend = null;
-    _this.onreadystatechange = null;
-    _this.readyState = 0;
-    _this.response = null;
-    _this.responseText = null;
-    _this.responseType = 'text';
-    _this.dataType = 'string';
-    _this.responseXML = null;
-    _this.status = 0;
-    _this.statusText = '';
-    _this.upload = {};
-    _this.withCredentials = false;
+    this.onabort = null;
+    this.onerror = null;
+    this.onload = null;
+    this.onloadstart = null;
+    this.onprogress = null;
+    this.ontimeout = null;
+    this.onloadend = null;
+    this.onreadystatechange = null;
+    this.readyState = 0;
+    this.response = null;
+    this.responseText = null;
+    this.responseType = 'text';
+    this.dataType = 'string';
+    this.responseXML = null;
+    this.status = 0;
+    this.statusText = '';
+    this.upload = {};
+    this.withCredentials = false;
 
-    _requestHeader.set(_assertThisInitialized(_this), {
+    _requestHeader.set(this, {
       'content-type': 'application/x-www-form-urlencoded'
     });
 
-    _responseHeader.set(_assertThisInitialized(_this), {});
-
-    return _this;
+    _responseHeader.set(this, {});
   }
 
-  _createClass(XMLHttpRequest, [{
-    key: "abort",
-    value: function abort() {
-      var myRequestTask = _requestTask.get(this);
+  abort() {
+    const myRequestTask = _requestTask.get(this);
 
-      if (myRequestTask) {
-        myRequestTask.abort();
+    if (myRequestTask) {
+      myRequestTask.abort();
+    }
+  }
+
+  getAllResponseHeaders() {
+    const responseHeader = _responseHeader.get(this);
+
+    return Object.keys(responseHeader).map(header => {
+      return `${header}: ${responseHeader[header]}`;
+    }).join('\n');
+  }
+
+  getResponseHeader(header) {
+    return _responseHeader.get(this)[header];
+  }
+
+  open(method, url
+  /* async, user, password 这几个参数在小程序内不支持*/
+  ) {
+    this._method = method;
+    this._url = url;
+
+    _changeReadyState.call(this, XMLHttpRequest.OPENED);
+  }
+
+  overrideMimeType() {}
+
+  send(data = '') {
+    if (this.readyState !== XMLHttpRequest.OPENED) {
+      throw new Error("Failed to execute 'send' on 'XMLHttpRequest': The object's state must be OPENED.");
+    } else {
+      const url = this._url;
+
+      const header = _requestHeader.get(this);
+
+      const responseType = this.responseType;
+      const dataType = this.dataType;
+
+      const relative = _isRelativePath(url);
+
+      let encoding;
+
+      if (responseType === 'arraybuffer') ; else {
+        encoding = 'utf8';
       }
-    }
-  }, {
-    key: "getAllResponseHeaders",
-    value: function getAllResponseHeaders() {
-      var responseHeader = _responseHeader.get(this);
 
-      return Object.keys(responseHeader).map(function (header) {
-        return "".concat(header, ": ").concat(responseHeader[header]);
-      }).join('\n');
-    }
-  }, {
-    key: "getResponseHeader",
-    value: function getResponseHeader(header) {
-      return _responseHeader.get(this)[header];
-    }
-  }, {
-    key: "open",
-    value: function open(method, url
-    /* async, user, password 这几个参数在小程序内不支持*/
-    ) {
-      this._method = method;
-      this._url = url;
+      delete this.response;
+      this.response = null;
 
-      _changeReadyState.call(this, XMLHttpRequest.OPENED);
-    }
-  }, {
-    key: "overrideMimeType",
-    value: function overrideMimeType() {}
-  }, {
-    key: "send",
-    value: function send() {
-      var _this2 = this;
+      const onSuccess = ({
+        data,
+        statusCode,
+        header
+      }) => {
+        statusCode = statusCode === undefined ? 200 : statusCode;
 
-      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-      if (this.readyState !== XMLHttpRequest.OPENED) {
-        throw new Error("Failed to execute 'send' on 'XMLHttpRequest': The object's state must be OPENED.");
-      } else {
-        var url = this._url;
-
-        var header = _requestHeader.get(this);
-
-        var responseType = this.responseType;
-        var dataType = this.dataType;
-
-        var relative = _isRelativePath(url);
-
-        var encoding;
-
-        if (responseType === 'arraybuffer') ; else {
-          encoding = 'utf8';
+        if (typeof data !== 'string' && !(data instanceof ArrayBuffer)) {
+          try {
+            data = JSON.stringify(data);
+          } catch (e) {
+            data = data;
+          }
         }
 
-        delete this.response;
-        this.response = null;
+        this.status = statusCode;
 
-        var onSuccess = function onSuccess(_ref) {
-          var data = _ref.data,
-              statusCode = _ref.statusCode,
-              header = _ref.header;
-          statusCode = statusCode === undefined ? 200 : statusCode;
+        if (header) {
+          _responseHeader.set(this, header);
+        }
 
-          if (typeof data !== 'string' && !(data instanceof ArrayBuffer)) {
-            try {
-              data = JSON.stringify(data);
-            } catch (e) {
-              data = data;
+        _triggerEvent.call(this, 'loadstart');
+
+        _changeReadyState.call(this, XMLHttpRequest.HEADERS_RECEIVED);
+
+        _changeReadyState.call(this, XMLHttpRequest.LOADING);
+
+        this.response = data;
+
+        if (data instanceof ArrayBuffer) {
+          Object.defineProperty(this, 'responseText', {
+            enumerable: true,
+            configurable: true,
+            get: function () {
+              throw "InvalidStateError : responseType is " + this.responseType;
             }
-          }
+          });
+        } else {
+          this.responseText = data;
+        }
 
-          _this2.status = statusCode;
+        _changeReadyState.call(this, XMLHttpRequest.DONE);
 
-          if (header) {
-            _responseHeader.set(_this2, header);
-          }
+        _triggerEvent.call(this, 'load');
 
-          _triggerEvent.call(_this2, 'loadstart');
+        _triggerEvent.call(this, 'loadend');
+      };
 
-          _changeReadyState.call(_this2, XMLHttpRequest.HEADERS_RECEIVED);
+      const onFail = ({
+        errMsg
+      }) => {
+        // TODO 规范错误
+        if (errMsg.indexOf('abort') !== -1) {
+          _triggerEvent.call(this, 'abort');
+        } else {
+          _triggerEvent.call(this, 'error', {
+            message: errMsg
+          });
+        }
 
-          _changeReadyState.call(_this2, XMLHttpRequest.LOADING);
-
-          _this2.response = data;
-
-          if (data instanceof ArrayBuffer) {
-            Object.defineProperty(_this2, 'responseText', {
-              enumerable: true,
-              configurable: true,
-              get: function get() {
-                throw "InvalidStateError : responseType is " + this.responseType;
-              }
-            });
-          } else {
-            _this2.responseText = data;
-          }
-
-          _changeReadyState.call(_this2, XMLHttpRequest.DONE);
-
-          _triggerEvent.call(_this2, 'load');
-
-          _triggerEvent.call(_this2, 'loadend');
-        };
-
-        var onFail = function onFail(_ref2) {
-          var errMsg = _ref2.errMsg;
-
-          // TODO 规范错误
-          if (errMsg.indexOf('abort') !== -1) {
-            _triggerEvent.call(_this2, 'abort');
-          } else {
-            _triggerEvent.call(_this2, 'error', {
-              message: errMsg
-            });
-          }
-
-          _triggerEvent.call(_this2, 'loadend');
-
-          if (relative) {
-            // 用户即使没监听error事件, 也给出相应的警告
-            console.warn(errMsg);
-          }
-        };
+        _triggerEvent.call(this, 'loadend');
 
         if (relative) {
-          var fs = wx.getFileSystemManager();
-          var options = {
-            'filePath': url,
-            'success': onSuccess,
-            'fail': onFail
-          };
+          // 用户即使没监听error事件, 也给出相应的警告
+          console.warn(errMsg);
+        }
+      };
 
-          if (encoding) {
-            options['encoding'] = encoding;
-          }
+      if (relative) {
+        const fs = wx.getFileSystemManager();
+        var options = {
+          'filePath': url,
+          'success': onSuccess,
+          'fail': onFail
+        };
 
-          fs.readFile(options);
-          return;
+        if (encoding) {
+          options['encoding'] = encoding;
         }
 
-        wx.request({
-          data: data,
-          url: url,
-          method: this._method,
-          header: header,
-          dataType: dataType,
-          responseType: responseType,
-          success: onSuccess,
-          fail: onFail
-        });
-      }
-    }
-  }, {
-    key: "setRequestHeader",
-    value: function setRequestHeader(header, value) {
-      var myHeader = _requestHeader.get(this);
-
-      myHeader[header] = value;
-
-      _requestHeader.set(this, myHeader);
-    }
-  }, {
-    key: "addEventListener",
-    value: function addEventListener(type, listener) {
-      var _this3 = this;
-
-      if (typeof listener !== 'function') {
+        fs.readFile(options);
         return;
       }
 
-      this['on' + type] = function () {
-        var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        event.target = event.target || _this3;
-        listener.call(_this3, event);
-      };
+      wx.request({
+        data,
+        url: url,
+        method: this._method,
+        header: header,
+        dataType: dataType,
+        responseType: responseType,
+        success: onSuccess,
+        fail: onFail
+      });
     }
-  }, {
-    key: "removeEventListener",
-    value: function removeEventListener(type, listener) {
-      if (this['on' + type] === listener) {
-        this['on' + type] = null;
-      }
-    }
-  }]);
+  }
 
-  return XMLHttpRequest;
-}(EventTarget); // TODO 没法模拟 HEADERS_RECEIVED 和 LOADING 两个状态
+  setRequestHeader(header, value) {
+    const myHeader = _requestHeader.get(this);
+
+    myHeader[header] = value;
+
+    _requestHeader.set(this, myHeader);
+  }
+
+  addEventListener(type, listener) {
+    if (typeof listener !== 'function') {
+      return;
+    }
+
+    this['on' + type] = (event = {}) => {
+      event.target = event.target || this;
+      listener.call(this, event);
+    };
+  }
+
+  removeEventListener(type, listener) {
+    if (this['on' + type] === listener) {
+      this['on' + type] = null;
+    }
+  }
+
+} // TODO 没法模拟 HEADERS_RECEIVED 和 LOADING 两个状态
+
 XMLHttpRequest.UNSEND = 0;
 XMLHttpRequest.OPENED = 1;
 XMLHttpRequest.HEADERS_RECEIVED = 2;
 XMLHttpRequest.LOADING = 3;
 XMLHttpRequest.DONE = 4;
 
-var _wx$getSystemInfoSync$2 = wx.getSystemInfoSync(),
-    platform$2 = _wx$getSystemInfoSync$2.platform; // export { default as HTMLImageElement } from './HTMLImageElement'
+const {
+  platform: platform$1
+} = wx.getSystemInfoSync(); // export { default as HTMLImageElement } from './HTMLImageElement'
 // export { default as localStorage } from './localStorage'
 // export { default as Symbol } from './Symbol'
 // export { default as WebSocket } from './WebSocket'
@@ -1777,7 +1568,7 @@ var _wx$getSystemInfoSync$2 = wx.getSystemInfoSync(),
 //helpers
 
 function getComputedStyle(dom) {
-  var tagName = dom.tagName;
+  const tagName = dom.tagName;
 
   if (tagName === "CANVAS") {
     return getCanvasComputedStyle(dom);
@@ -1806,30 +1597,30 @@ function focus() {}
 
 function blur() {}
 
-if (platform$2 !== 'devtools') {
-  var wxPerf$1 = wx.getPerformance ? wx.getPerformance() : Date;
-  var consoleTimers = {};
+if (platform$1 !== 'devtools') {
+  const wxPerf = wx.getPerformance ? wx.getPerformance() : Date;
+  const consoleTimers = {};
 
   console.time = function (name) {
-    consoleTimers[name] = wxPerf$1.now();
+    consoleTimers[name] = wxPerf.now();
   };
 
   console.timeEnd = function (name) {
-    var timeStart = consoleTimers[name];
+    const timeStart = consoleTimers[name];
 
     if (!timeStart) {
       return;
     }
 
-    var timeElapsed = wxPerf$1.now() - timeStart;
+    const timeElapsed = wxPerf.now() - timeStart;
     console.log(name + ": " + timeElapsed / 1000 + "ms");
     delete consoleTimers[name];
   };
 }
 
 if (wx.onWindowResize) {
-  wx.onWindowResize(function (res) {
-    var event = new Event('resize');
+  wx.onWindowResize(res => {
+    const event = new Event('resize');
     event.target = document;
     event.timeStamp = Date.now();
     event.res = res;
@@ -1840,17 +1631,11 @@ if (wx.onWindowResize) {
 }
 
 function touchEventHandlerFactory(target, type) {
-  return function (rawEvent) {
-    var event = new TouchEvent(type);
-    event.changedTouches = rawEvent.changedTouches.map(function (touch) {
-      return new Touch(touch);
-    });
-    event.touches = rawEvent.touches.map(function (touch) {
-      return new Touch(touch);
-    });
-    event.targetTouches = Array.prototype.slice.call(rawEvent.touches.map(function (touch) {
-      return new Touch(touch);
-    }));
+  return rawEvent => {
+    const event = new TouchEvent(type);
+    event.changedTouches = rawEvent.changedTouches.map(touch => new Touch(touch));
+    event.touches = rawEvent.touches.map(touch => new Touch(touch));
+    event.targetTouches = Array.prototype.slice.call(rawEvent.touches.map(touch => new Touch(touch)));
     event.timeStamp = rawEvent.timeStamp;
 
     if (target == 'document') {
@@ -1870,13 +1655,13 @@ function touchEventHandlerFactory(target, type) {
 // const _clearInterval = clearInterval;
 
 
-var _requestAnimationFrame = _canvas ? _canvas.requestAnimationFrame : noop;
+const _requestAnimationFrame = _canvas ? _canvas.requestAnimationFrame : noop;
 
-var _cancelAnimationFrame = _canvas ? _canvas.cancelAnimationFrame : noop; //TODO
+const _cancelAnimationFrame = _canvas ? _canvas.cancelAnimationFrame : noop; //TODO
 
 
-var AudioContext = null;
-var webkitAudioContext = null;
+let AudioContext = null;
+let webkitAudioContext = null;
 
 function addEventListener(type, listener) {
   document.addEventListener(type, listener);
@@ -1886,7 +1671,7 @@ function removeEventListener(type, listener) {
   document.removeEventListener(type, listener);
 }
 
-var arrayBufferToBase64 = wx.arrayBufferToBase64 || noop;
-var base64ToArrayBuffer = wx.base64ToArrayBuffer || noop;
+const arrayBufferToBase64 = wx.arrayBufferToBase64 || noop;
+const base64ToArrayBuffer = wx.base64ToArrayBuffer || noop;
 
 export { AudioContext, Element, HTMLElement, Image, TouchEvent, noop as VRFrameData, XMLHttpRequest, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };
