@@ -1035,7 +1035,12 @@ const location = {
 
 };
 
-const imageConstructor = wx.createImage(); // imageConstructor.__proto__.__proto__ = new HTMLElement();
+class HTMLImageElement extends HTMLElement {
+  constructor() {
+    super('img');
+  }
+
+}
 
 function Image() {
   let canvas = _canvas;
@@ -1674,4 +1679,4 @@ function removeEventListener(type, listener) {
 const arrayBufferToBase64 = wx.arrayBufferToBase64 || noop;
 const base64ToArrayBuffer = wx.base64ToArrayBuffer || noop;
 
-export { AudioContext, Element, HTMLElement, Image, TouchEvent, noop as VRFrameData, XMLHttpRequest, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };
+export { AudioContext, Element, HTMLElement, HTMLImageElement, Image, TouchEvent, noop as VRFrameData, XMLHttpRequest, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };

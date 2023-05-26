@@ -14,6 +14,8 @@ export { default as XMLHttpRequest } from './XMLHttpRequest'
 export { default as Image } from './Image'
 export { default as Element } from './Element'
 export { default as HTMLElement } from './HTMLElement'
+export { default as HTMLImageElement } from './HTMLImageElement'
+
 export * from './WindowProperties'
 
 const { platform } = wx.getSystemInfoSync()
