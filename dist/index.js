@@ -1678,6 +1678,7 @@ function removeEventListener(type, listener) {
 
 const arrayBufferToBase64 = wx.arrayBufferToBase64 || noop;
 const base64ToArrayBuffer = wx.base64ToArrayBuffer || noop;
-var __THREE__ = '';
+
+var __THREE__;
 
 export { AudioContext, Element, HTMLElement, HTMLImageElement, Image, TouchEvent, noop as VRFrameData, XMLHttpRequest, __THREE__, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };
