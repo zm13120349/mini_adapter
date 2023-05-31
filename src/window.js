@@ -172,7 +172,7 @@ export {
     _requestAnimationFrame as requestAnimationFrame,
     _cancelAnimationFrame as cancelAnimationFrame,
     arrayBufferToBase64,
-    base64ToArrayBuffer
+    base64ToArrayBuffer,
     // _setTimeout as setTimeout,
     // _clearTimeout as clearTimeout,
     // _setInterval as setInterval,
