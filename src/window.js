@@ -146,7 +146,7 @@ function removeEventListener(type, listener) {
 const arrayBufferToBase64 = wx.arrayBufferToBase64 || noop
 const base64ToArrayBuffer = wx.base64ToArrayBuffer || noop
 
-var __THREE__
+let __THREE__ = ''
 
 export {
     // 暴露全局的 canvas
