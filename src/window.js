@@ -23,7 +23,7 @@ const { platform } = wx.getSystemInfoSync()
 
 // export { default as HTMLImageElement } from './HTMLImageElement'
 // export { default as HTMLCanvasElement } from './HTMLCanvasElement'
-// export { default as WebGLRenderingContext } from './WebGLRenderingContext'
+export { default as WebGLRenderingContext } from './WebGLRenderingContext'
 
 
 // export { TouchEvent, PointerEvent, MouseEvent } from './EventIniter/index.js'
