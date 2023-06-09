@@ -1557,11 +1557,16 @@ XMLHttpRequest.HEADERS_RECEIVED = 2;
 XMLHttpRequest.LOADING = 3;
 XMLHttpRequest.DONE = 4;
 
-class WebGLRenderingContext {
-  constructor() {// TODO
-  }
+// This is free and unencumbered software released into the public domain.
+// See LICENSE.md for more information.
+var encoding = require("./lib/encoding.js"); // module.exports = {
+//   TextEncoder: encoding.TextEncoder,
+//   TextDecoder: encoding.TextDecoder,
+// };
 
-}
+
+const TextDecoder = encoding.TextDecoder;
+const TextEncoder = encoding.TextEncoder;
 
 const {
   platform: platform$1
@@ -1686,4 +1691,4 @@ const arrayBufferToBase64 = wx.arrayBufferToBase64 || noop;
 const base64ToArrayBuffer = wx.base64ToArrayBuffer || noop;
 let __THREE__ = '';
 
-export { AudioContext, Element, HTMLElement, HTMLImageElement, Image, TouchEvent, noop as VRFrameData, WebGLRenderingContext, XMLHttpRequest, __THREE__, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };
+export { AudioContext, Element, HTMLElement, HTMLImageElement, Image, TextDecoder, TextEncoder, TouchEvent, noop as VRFrameData, XMLHttpRequest, __THREE__, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };

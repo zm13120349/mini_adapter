@@ -15,6 +15,7 @@ export { default as Image } from './Image'
 export { default as Element } from './Element'
 export { default as HTMLElement } from './HTMLElement'
 export { default as HTMLImageElement } from './HTMLImageElement'
+export { TextDecoder, TextEncoder} from './TextEncoder'
 
 export * from './WindowProperties'
 
@@ -22,7 +23,7 @@ const { platform } = wx.getSystemInfoSync()
 
 // export { default as HTMLImageElement } from './HTMLImageElement'
 // export { default as HTMLCanvasElement } from './HTMLCanvasElement'
-export { default as WebGLRenderingContext } from './WebGLRenderingContext'
+// export { default as WebGLRenderingContext } from './WebGLRenderingContext'
 
 
 // export { TouchEvent, PointerEvent, MouseEvent } from './EventIniter/index.js'
