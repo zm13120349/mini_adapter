@@ -15,7 +15,6 @@ export { default as Image } from './Image'
 export { default as Element } from './Element'
 export { default as HTMLElement } from './HTMLElement'
 export { default as HTMLImageElement } from './HTMLImageElement'
-export { TextEncoder, TextDecoder } from './textEncoder.js'
 
 export * from './WindowProperties'
 

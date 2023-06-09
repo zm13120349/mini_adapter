@@ -1557,66 +1557,6 @@ XMLHttpRequest.HEADERS_RECEIVED = 2;
 XMLHttpRequest.LOADING = 3;
 XMLHttpRequest.DONE = 4;
 
-var utf8Encodings = ['utf8', 'utf-8', 'unicode-1-1-utf-8'];
-
-function TextEncoder(encoding) {
-  if (utf8Encodings.indexOf(encoding) < 0 && typeof encoding !== 'undefined' && encoding != null) {
-    throw new RangeError('Invalid encoding type. Only utf-8 is supported');
-  } else {
-    this.encoding = 'utf-8';
-
-    this.encode = function (str) {
-      if (typeof str !== 'string') {
-        throw new TypeError('passed argument must be of tye string');
-      }
-
-      var binstr = unescape(encodeURIComponent(str)),
-          arr = new Uint8Array(binstr.length);
-      const split = binstr.split('');
-
-      for (let i = 0; i < split.length; i++) {
-        arr[i] = split[i].charCodeAt(0);
-      }
-
-      return arr;
-    };
-  }
-}
-
-function TextDecoder(encoding) {
-  if (utf8Encodings.indexOf(encoding) < 0 && typeof encoding !== 'undefined' && encoding != null) {
-    throw new RangeError('Invalid encoding type. Only utf-8 is supported');
-  } else {
-    this.encoding = 'utf-8';
-
-    this.decode = function (view, options) {
-      if (typeof view === 'undefined') {
-        return '';
-      }
-
-      var stream = typeof options !== 'undefined' && stream in options ? options.stream : false;
-
-      if (typeof stream !== 'boolean') {
-        throw new TypeError('stream option must be boolean');
-      }
-
-      if (!ArrayBuffer.isView(view)) {
-        throw new TypeError('passed argument must be an array buffer view');
-      } else {
-        var arr = new Uint8Array(view.buffer, view.byteOffset, view.byteLength),
-            charArr = new Array(arr.length);
-
-        for (let i = 0; i < arr.length; i++) {
-          charArr[i] = String.fromCharCode(arr[i]);
-        }
-
-        return decodeURIComponent(escape(charArr.join('')));
-      }
-    };
-  }
-}
- //miniprogram-npm-outsideDeps=[]
-
 class WebGLRenderingContext {
   constructor() {// TODO
   }
@@ -1746,4 +1686,4 @@ const arrayBufferToBase64 = wx.arrayBufferToBase64 || noop;
 const base64ToArrayBuffer = wx.base64ToArrayBuffer || noop;
 let __THREE__ = '';
 
-export { AudioContext, Element, HTMLElement, HTMLImageElement, Image, TextDecoder, TextEncoder, TouchEvent, noop as VRFrameData, WebGLRenderingContext, XMLHttpRequest, __THREE__, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };
+export { AudioContext, Element, HTMLElement, HTMLImageElement, Image, TouchEvent, noop as VRFrameData, WebGLRenderingContext, XMLHttpRequest, __THREE__, _canvasMap, addEventListener, alert, arrayBufferToBase64, base64ToArrayBuffer, blur, _cancelAnimationFrame as cancelAnimationFrame, _canvas as canvas, clearCanvas, devicePixelRatio, document$1 as document, focus, getComputedStyle, innerHeight, innerWidth, location, navigator, ontouchend, ontouchmove, ontouchstart, performance$1 as performance, registerCanvas, removeEventListener, _requestAnimationFrame as requestAnimationFrame, screen, scrollBy, scrollTo, scrollX, scrollY, touchEventHandlerFactory, unregisterCanvas, webkitAudioContext };
